@@ -1,9 +1,8 @@
 import './App.css';
-
 import React, { useState } from 'react'
 import NavBar from './components/NavBar';
 import News from './components/News';
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {HashRouter as Router, Switch, Route} from "react-router-dom";
 import LoadingBar from 'react-top-loading-bar'
 const App = ()=> {
   const pageSize = 5;
@@ -12,13 +11,9 @@ const App = ()=> {
  
     return (
       <div>
-        <Router>
+        <Router basename={process.env.PUBLIC_URL + '/'}>
         <NavBar/> 
-        <LoadingBar
-        height={3}
-        color='#f11946'
-        progress={progress} 
-      />
+        <LoadingBar height={3} color='#f11946' progress={progress} />
         <Switch>
           <Route exact path="/"><News setProgress={setProgress} apiKey={apiKey} key="general" pageSize={pageSize} country="in" category="general"/></Route> 
           <Route exact path="/business"><News setProgress={setProgress} apiKey={apiKey} key="business" pageSize={pageSize} country="in" category="business"/></Route> 
